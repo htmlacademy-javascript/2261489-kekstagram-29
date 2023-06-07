@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Andrey Sinikov](https://up.htmlacademy.ru/javascript/29/user/2261489).
-* Наставник: `Неизвестно`.
+* Наставник: [Егор Глебов](https://htmlacademy.ru/profile/beast).
 
 ---
 
