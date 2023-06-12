@@ -34,4 +34,25 @@ isPalindrome('LevEl');
 isPalindrome('Торт');
 isPalindrome('palindrome');
 
+// Функция для извлечения чисел
 
+const extractNumbers = function (string) {
+  let newString = '';
+
+  for (let i = 0; i <= string.length; i++) {
+    const insert = parseInt(string[i], 10);
+    if (!isNaN(insert)) {
+      newString += insert;
+    }
+  }
+  console.log(newString ? parseInt(newString, 10) : NaN);
+};
+
+// Тест
+// NaN
+extractNumbers('Попробуй найти тут цифры');
+// Numbers
+extractNumbers('А тут есть хоть 1 цифра?');
+extractNumbers('Z15 F-16 X18');
+extractNumbers('Везде 2023 год');
+extractNumbers('А мы живём в 1984');
