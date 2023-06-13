@@ -1,17 +1,6 @@
 // Функция для проверки длины строки
 
-const stringLength = (string, length) => {
-  console.log(string.length <= length);
-};
-
-// Тест:
-// Строка длиннее
-stringLength('some string', 5);
-// Строка короче
-stringLength('some string', 22);
-stringLength('js', 6);
-// Строка равна
-stringLength('any string', 10);
+const stringLength = (string, length) => string.length <= length;
 
 // Функция для проверки строки на палиндромность
 
@@ -23,16 +12,8 @@ const isPalindrome = function (string) {
     const index = normalizedString[i];
     newString += index;
   }
-  console.log(normalizedString === newString);
+  return normalizedString === newString;
 };
-
-// Тест
-// Палиндромы
-isPalindrome('Тот');
-isPalindrome('LevEl');
-// Не палиндромы
-isPalindrome('Торт');
-isPalindrome('palindrome');
 
 // Функция для извлечения чисел
 
@@ -45,14 +26,5 @@ const extractNumbers = function (string) {
       newString += insert;
     }
   }
-  console.log(newString ? parseInt(newString, 10) : NaN);
+  return newString ? parseInt(newString, 10) : NaN;
 };
-
-// Тест
-// NaN
-extractNumbers('Попробуй найти тут цифры');
-// Numbers
-extractNumbers('А тут есть хоть 1 цифра?');
-extractNumbers('Z15 F-16 X18');
-extractNumbers('Везде 2023 год');
-extractNumbers('А мы живём в 1984');
