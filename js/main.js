@@ -51,3 +51,12 @@ const getMessage = function () {
   return message;
 };
 getMessage();
+
+// Генератор аватаров
+const getAvatar = function () {
+  const avatar = 'img/avatar-' + (getRandomNumber(1, 6)) + '.svg';
+  return avatar;
+};
+getAvatar();
+
+
