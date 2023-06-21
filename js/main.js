@@ -59,4 +59,10 @@ const getAvatar = function () {
 };
 getAvatar();
 
-
+// Генератор id
+const getId = function () {
+  const uniqueid = getUniqueNumber(1, 15570);
+  const id = uniqueid();
+  return id;
+};
+getId();
