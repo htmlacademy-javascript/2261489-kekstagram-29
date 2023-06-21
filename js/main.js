@@ -44,3 +44,10 @@ const getUniqueNumber = function (min, max) {
   };
 };
 getUniqueNumber();
+
+// Генератор комментариев
+const getMessage = function () {
+  let message = messages[getRandomNumber(0, messages.length - 1)];
+  return message;
+};
+getMessage();
