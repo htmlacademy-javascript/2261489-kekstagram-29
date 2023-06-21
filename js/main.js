@@ -68,7 +68,7 @@ const getId = function () {
 getId();
 
 // Комментарий
-let comment = function () {
+let getComment = function () {
   return {
     id: getId(),
     avatar: getAvatar(),
@@ -76,4 +76,25 @@ let comment = function () {
     name: NAMES[getRandomNumber(0, NAMES.length - 1)],
   };
 };
-console.log(comment());
+console.log(getComment());
+
+const getPhotoId = getUniqueNumber(1, 25);
+const getUrl = function () {
+  return `photos/${getRandomNumber(1, 25)}.jpg`;
+};
+const getLikes = function () {
+  return getRandomNumber(15, 200);
+};
+
+
+// Описание фотографии
+let photoDescription = function () {
+  return {
+    photoId: getPhotoId(),
+    url: getUrl(),
+    description: 'Фотка жи есть',
+    likes: getLikes(),
+    comments:  Array.from({length: getRandomNumber(0, 30)}, getComment),
+  };
+};
+console.log(photoDescription());
