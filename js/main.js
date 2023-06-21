@@ -76,7 +76,6 @@ let getComment = function () {
     name: NAMES[getRandomNumber(0, NAMES.length - 1)],
   };
 };
-console.log(getComment());
 
 const getPhotoId = getUniqueNumber(1, 25);
 const getUrl = function () {
@@ -88,13 +87,16 @@ const getLikes = function () {
 
 
 // Описание фотографии
-let photoDescription = function () {
+let createPhotoPage = function () {
   return {
     photoId: getPhotoId(),
     url: getUrl(),
     description: 'Фотка жи есть',
     likes: getLikes(),
-    comments:  Array.from({length: getRandomNumber(0, 30)}, getComment),
+    comments: Array.from({length: getRandomNumber(0, 30)}, getComment),
   };
 };
-console.log(photoDescription());
+
+// // Массив из 25 объектов
+let photoPages = Array.from({length: 25}, createPhotoPage);
+console.log(photoPages);
