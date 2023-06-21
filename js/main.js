@@ -54,7 +54,7 @@ getMessage();
 
 // Генератор аватаров
 const getAvatar = function () {
-  const avatar = 'img/avatar-' + (getRandomNumber(1, 6)) + '.svg';
+  const avatar = `img/avatar-${getRandomNumber(1, 6)}.svg`;
   return avatar;
 };
 getAvatar();
@@ -66,3 +66,14 @@ const getId = function () {
   return id;
 };
 getId();
+
+// Комментарий
+let comment = function () {
+  return {
+    id: getId(),
+    avatar: getAvatar(),
+    message: getMessage(),
+    name: NAMES[getRandomNumber(0, NAMES.length - 1)],
+  };
+};
+console.log(comment());
