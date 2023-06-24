@@ -46,25 +46,15 @@ const getUniqueNumber = function (min, max) {
 getUniqueNumber();
 
 // Генератор комментариев
-const getMessage = function () {
-  let message = messages[getRandomNumber(0, messages.length - 1)];
-  return message;
-};
+const getMessage = () => messages[getRandomNumber(0, messages.length - 1)];
 getMessage();
 
 // Генератор аватаров
-const getAvatar = function () {
-  const avatar = `img/avatar-${getRandomNumber(1, 6)}.svg`;
-  return avatar;
-};
+const getAvatar = () => `img/avatar-${getRandomNumber(1, 6)}.svg`;
 getAvatar();
 
 // Генератор id
-const getId = function () {
-  const uniqueId = getUniqueNumber(1, 15570);
-  const id = uniqueid();
-  return id;
-};
+const getId = () => (uniqueId => uniqueId())(getUniqueNumber(1, 15570));
 getId();
 
 // Комментарий
@@ -73,7 +63,7 @@ let getComment = function () {
     id: getId(),
     avatar: getAvatar(),
     message: getMessage(),
-    name: NAMES[getRandomNumber(0, NAMES.length - 1)],
+    name: names[getRandomNumber(0, names.length - 1)],
   };
 };
 
