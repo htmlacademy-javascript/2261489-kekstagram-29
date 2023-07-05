@@ -68,8 +68,10 @@ const createPhotoPage = function () {
   };
 };
 
+const photoPage = createPhotoPage();
+
 // // Массив из 25 объектов
 const getPhotos = () => Array.from({length: 25})
   .map((_, photoIndex) => createPhotoPage(photoIndex + 1));
 
-export {getPhotos };
+export { photoPage, getPhotos };
