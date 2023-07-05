@@ -1,2 +1,2 @@
 import './util.js';
-import { getPhotoPages } from './data.js';
+import './data.js';

@@ -69,5 +69,6 @@ const createPhotoPage = function () {
 };
 
 // // Массив из 25 объектов
-const getPhotoPages = Array.from({length: 25}, createPhotoPage);
-console.log(getPhotoPages);
+const getPhotos = () => Array.from({length: 25})
+  .map((_, photoIndex) => createPhotoPage(photoIndex + 1));
+console.log(getPhotos());
