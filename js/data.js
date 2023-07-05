@@ -58,7 +58,7 @@ const getLikes = function () {
 
 
 // Описание фотографии
-let createPhotoPage = function () {
+const createPhotoPage = function () {
   return {
     photoId: getPhotoId(),
     url: getUrl(),
@@ -69,5 +69,5 @@ let createPhotoPage = function () {
 };
 
 // // Массив из 25 объектов
-let photoPages = Array.from({length: 25}, createPhotoPage);
-console.log(photoPages);
+const getPhotoPages = Array.from({length: 25}, createPhotoPage);
+console.log(getPhotoPages);
