@@ -1,4 +1,3 @@
-
 // Находим содержимое шаблона и записываем в переменную
 const photoTemplate = document.querySelector('#picture')
   .content.querySelector('.picture');
@@ -18,6 +17,16 @@ const createPhoto = ({ url, description, likes, comments }) => {
   return photo;
 };
 
-console.log(createPhoto(photoPage));
+// Отрисовываем на странице все миниатюры
+const renderPhotos = (pictures) => {
+  const fragment = document.createDocumentFragment();
 
-export {createPhoto};
+  pictures.forEach((picture) => {
+    const photo = createPhoto(picture);
+    fragment.append(photo);
+  });
+
+  container.append(fragment);
+};
+
+export { renderPhotos };
