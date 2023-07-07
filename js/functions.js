@@ -1,6 +1,7 @@
 // Функция для проверки длины строки
 
 const stringLength = (string, length) => string.length <= length;
+stringLength();
 
 // Функция для проверки строки на палиндромность
 
@@ -14,6 +15,8 @@ const isPalindrome = function (string) {
   }
   return normalizedString === newString;
 };
+
+isPalindrome();
 
 // Функция для извлечения чисел
 
@@ -29,6 +32,8 @@ const extractNumbers = function (string) {
   return newString ? parseInt(newString, 10) : NaN;
 };
 
+extractNumbers();
+
 // Функция для проверки встречи в рабочее время
 
 const getMinsFromTime = function (timeString) {
@@ -41,7 +46,7 @@ const checkMeetingTime = function (workStart, workEnd, meetingStart, meetingDura
   const workEndInMins = getMinsFromTime(workEnd);
   const meetingStartInMins = getMinsFromTime(meetingStart);
 
-  console.log(meetingStartInMins >= workStartInMins && meetingStartInMins + meetingDuration <= workEndInMins);
+  return meetingStartInMins >= workStartInMins && meetingStartInMins + meetingDuration <= workEndInMins;
 };
 checkMeetingTime('08:00', '18:00', '14:00', 90);
 
