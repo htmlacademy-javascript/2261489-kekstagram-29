@@ -35,11 +35,11 @@ const getAvatar = () => `img/avatar-${getRandomNumber(1, 6)}.svg`;
 getAvatar();
 
 // Генератор id
-const getId = () => (uniqueId => uniqueId())(getUniqueNumber(1, 15570));
+const getId = () => ((uniqueId) => uniqueId())(getUniqueNumber(1, 15570));
 getId();
 
 // Комментарий
-let getComment = function () {
+const getComment = function () {
   return {
     id: getId(),
     avatar: getAvatar(),
@@ -70,6 +70,6 @@ const createPhotoPage = function () {
 
 // // Массив из 25 объектов
 const getPhotos = () => Array.from({length: 25})
-  .map((_, photoIndex) => createPhotoPage());
+  .map(() => createPhotoPage());
 
 export { getPhotos };
