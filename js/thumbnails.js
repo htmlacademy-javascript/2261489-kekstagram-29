@@ -1,11 +1,11 @@
-// Находим содержимое шаблона и записываем в переменную
+// Шаблон фото
 const photoTemplate = document.querySelector('#picture')
   .content.querySelector('.picture');
 
-// Находим контейнер, куда сложим отрисованные фото
+// Контейнер для сгенерированных фото
 const container = document.querySelector('.pictures');
 
-// Создаём отдельный элемент- фото
+// Отдельный элемент- фото
 const createPhoto = ({ url, description, likes, comments }) => {
   const photo = photoTemplate.cloneNode(true);
 
@@ -17,7 +17,7 @@ const createPhoto = ({ url, description, likes, comments }) => {
   return photo;
 };
 
-// Отрисовываем на странице все миниатюры
+// Отрисовка на странице всех миниатюр
 const renderPhotos = (pictures) => {
   const fragment = document.createDocumentFragment();
 
