@@ -35,11 +35,11 @@ const getAvatar = () => `img/avatar-${getRandomNumber(1, 6)}.svg`;
 getAvatar();
 
 // Генератор id
-const getId = () => (uniqueId => uniqueId())(getUniqueNumber(1, 15570));
+const getId = () => ((uniqueId) => uniqueId())(getUniqueNumber(1, 15570));
 getId();
 
-// Комментарий
-let getComment = function () {
+// Генератор комментария
+const getComment = function () {
   return {
     id: getId(),
     avatar: getAvatar(),
@@ -48,17 +48,19 @@ let getComment = function () {
   };
 };
 
+// Генератор фото-id
 const getPhotoId = getUniqueNumber(1, 25);
-const getUrl = function () {
-  return `photos/${getRandomNumber(1, 25)}.jpg`;
-};
+
+// Генератор url
+const getNumberForPhotoURL = getUniqueNumber(1, 25);
+const getUrl = () => `photos/${getNumberForPhotoURL()}.jpg`;
+
 const getLikes = function () {
   return getRandomNumber(15, 200);
 };
 
-
 // Описание фотографии
-let createPhotoPage = function () {
+const createPhotoPage = function () {
   return {
     photoId: getPhotoId(),
     url: getUrl(),
@@ -68,6 +70,8 @@ let createPhotoPage = function () {
   };
 };
 
-// // Массив из 25 объектов
-let photoPages = Array.from({length: 25}, createPhotoPage);
-console.log(photoPages);
+// // Массив из 25 объектов-фото
+const getPhotos = () => Array.from({length: 25})
+  .map(() => createPhotoPage());
+
+export { getPhotos };
