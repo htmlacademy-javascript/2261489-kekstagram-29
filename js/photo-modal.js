@@ -9,7 +9,7 @@ const bodyElement = document.querySelector('body');
 
 
 // Функция для закрытия полноэкранного фото
-function hideModalPhoto = () => {
+const hideModalPhoto = () => {
   photoModalElement.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
@@ -21,10 +21,10 @@ function onDocumentKeydown(evt) {
     evt.preventDefault();
     hideModalPhoto();
   }
-};
+}
 
 // Обработчик клика на кнопку закрытия полноэкранного фото
-function onCancelButtonClick = () => {
+const onCancelButtonClick = () => {
   hideModalPhoto();
 };
 
@@ -45,7 +45,7 @@ const createComment = ({ avatar, name, message}) => {
   comment.querySelector('.social__text').textContent = message;
 
   return comment;
-}
+};
 
 // Функция для показа комментариев
 const renderComments = (comments) => {
@@ -55,13 +55,13 @@ const renderComments = (comments) => {
   comments.forEach((item) => {
     const comment = createComment(item);
     fragment.append(comment);
-  })
+  });
 
   commentListElement.append(fragment);
 };
 
 // Функция для показа полноэкранного фото
-function showModalPhoto = (data) => {
+const showModalPhoto = (data) => {
   photoModalElement.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
   commentsLoaderElement.classList.add('hidden');
@@ -69,8 +69,9 @@ function showModalPhoto = (data) => {
   document.addEventListener('keydown', onDocumentKeydown);
 
   renderPhotoData(data);
+  renderComments(data.comments);
 };
 
-
-
 cancelButtonElement.addEventListener('click', onCancelButtonClick);
+
+export { showModalPhoto };
