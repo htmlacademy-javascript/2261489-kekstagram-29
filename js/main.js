@@ -1,4 +1,4 @@
 import { getPhotos } from './data.js';
-import { renderPhotos } from './thumbnails.js';
+import { openModal } from './open-photo.js';
 
-renderPhotos(getPhotos());
+openModal(getPhotos());
