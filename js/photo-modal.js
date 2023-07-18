@@ -1,19 +1,26 @@
-// import { getPhotoData } from './data.js';
 // Находим элементы полноэкранного фото
 const photoModalElement = document.querySelector('.big-picture');
-const commentCountElement = document.querySelector('.social__comment-count');
-const commentListElement = document.querySelector('.social__comments');
-const commentsLoaderElement = document.querySelector('.social__comments-loader');
-const cancelButtonElement = document.querySelector('.big-picture__cancel');
-const commentElement = document.querySelector('.big-picture__social').querySelector('.social__comment');
+const commentCountElement = photoModalElement.querySelector('.social__comment-count');
+const commentsShownCountElement = photoModalElement.querySelector('.comments-count');
+const commentListElement = photoModalElement.querySelector('.social__comments');
+const commentsLoaderElement = photoModalElement.querySelector('.comments-loader');
+const cancelButtonElement = photoModalElement.querySelector('.big-picture__cancel');
+const commentElement = photoModalElement.querySelector('.big-picture__social').querySelector('.social__comment');
 const bodyElement = document.querySelector('body');
 
+// Количество комментариев для показа
+const commentsForShow = 5;
+
+// Массив и количество отображенных комментариев перед открытием фото
+let commentsShown = 0;
+let comments = [];
 
 // Функция для закрытия полноэкранного фото
 const hideModalPhoto = () => {
   photoModalElement.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
+  commentsShown = 0;
 };
 
 // Функция-обработчик нажатия Escape
@@ -25,16 +32,12 @@ function onDocumentKeydown(evt) {
 }
 
 // Обработчик клика на кнопку закрытия полноэкранного фото
-const onCancelButtonClick = () => {
-  hideModalPhoto();
-};
+const onCancelButtonClick = () => hideModalPhoto();
 
 // Функция для показа деталей фото
-
-const renderPhotoData = ({url, avatar, likes, description}) => {
+const renderPhotoData = ({url, likes, description}) => {
 
   photoModalElement.querySelector('.big-picture__img img').src = url;
-  photoModalElement.querySelector('.social__header .social__picture').src = avatar;
   photoModalElement.querySelector('.big-picture__img img').alt = description;
   photoModalElement.querySelector('.social__caption').textContent = description;
   photoModalElement.querySelector('.likes-count').textContent = likes;
@@ -52,17 +55,30 @@ const createComment = ({ avatar, name, message }) => {
 };
 
 // Функция для показа комментариев
-const renderComments = (comments) => {
-  commentListElement.innerHTML = '';
+const renderComments = () => {
+  commentsShown += commentsForShow;
+
+  if (commentsShown >= comments.length) {
+    commentsLoaderElement.classList.add('hidden');
+    commentsShown = comments.length;
+  } else {
+    commentsLoaderElement.classList.remove('hidden');
+  }
 
   const fragment = document.createDocumentFragment();
-  comments.forEach((item) => {
-    const comment = createComment(item);
+  for (let i = 0; i < commentsShown; i++) {
+    const comment = createComment(comments[i]);
     fragment.append(comment);
-  });
+  }
 
+  commentListElement.innerHTML = '';
   commentListElement.append(fragment);
+  commentsShownCountElement.textContent = commentsShown;
+  commentCountElement.textContent = comments.length;
 };
+
+// Обработчик кнопки для дозагрузки комментариев
+const onCommentsLoaderClick = () => renderComments(comments);
 
 // Функция для показа полноэкранного фото
 const showModalPhoto = (data) => {
@@ -72,11 +88,15 @@ const showModalPhoto = (data) => {
   commentCountElement.classList.add('hidden');
   document.addEventListener('keydown', onDocumentKeydown);
 
-  // const photoData = createPhotoPage();
   renderPhotoData(data);
-  renderComments(data.comments);
+  comments = data.comments;
+
+  if (comments.length > 0) {
+    renderComments(comments);
+  }
 };
 
 cancelButtonElement.addEventListener('click', onCancelButtonClick);
+commentsLoaderElement.addEventListener('click', onCommentsLoaderClick);
 
 export { showModalPhoto };
