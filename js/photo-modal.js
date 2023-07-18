@@ -1,7 +1,7 @@
 // Находим элементы полноэкранного фото
 const photoModalElement = document.querySelector('.big-picture');
-const commentCountElement = photoModalElement.querySelector('.social__comment-count');
-const commentsShownCountElement = photoModalElement.querySelector('.comments-count');
+const commentCountElement = document.querySelector('.comments-count');
+const commentShownElement = document.querySelector('.comments-shown');
 const commentListElement = photoModalElement.querySelector('.social__comments');
 const commentsLoaderElement = photoModalElement.querySelector('.comments-loader');
 const cancelButtonElement = photoModalElement.querySelector('.big-picture__cancel');
@@ -73,7 +73,7 @@ const renderComments = () => {
 
   commentListElement.innerHTML = '';
   commentListElement.append(fragment);
-  commentsShownCountElement.textContent = commentsShown;
+  commentShownElement.textContent = commentsShown;
   commentCountElement.textContent = comments.length;
 };
 
@@ -85,7 +85,7 @@ const showModalPhoto = (data) => {
   photoModalElement.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
   commentsLoaderElement.classList.add('hidden');
-  commentCountElement.classList.add('hidden');
+  commentCountElement.classList.remove('hidden');
   document.addEventListener('keydown', onDocumentKeydown);
 
   renderPhotoData(data);
