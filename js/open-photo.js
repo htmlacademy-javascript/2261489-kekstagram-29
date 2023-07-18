@@ -13,9 +13,7 @@ const openModal = (pictures) => {
     }
 
     evt.preventDefault();
-    const picture = pictures.find(
-      (item) => item.id === +photo.dataset.photoId
-    );
+    const picture = pictures.find((item) => item.photoId === +photo.dataset.photoId);
     showModalPhoto(picture);
   });
   renderPhotos(pictures, container);

@@ -1,3 +1,4 @@
+// import { getPhotoData } from './data.js';
 // Находим элементы полноэкранного фото
 const photoModalElement = document.querySelector('.big-picture');
 const commentCountElement = document.querySelector('.social__comment-count');
@@ -29,15 +30,18 @@ const onCancelButtonClick = () => {
 };
 
 // Функция для показа деталей фото
-const renderPhotoData = ({ url, description, likes }) => {
+
+const renderPhotoData = ({url, avatar, likes, description}) => {
+
   photoModalElement.querySelector('.big-picture__img img').src = url;
+  photoModalElement.querySelector('.social__header .social__picture').src = avatar;
   photoModalElement.querySelector('.big-picture__img img').alt = description;
   photoModalElement.querySelector('.social__caption').textContent = description;
   photoModalElement.querySelector('.likes-count').textContent = likes;
 };
 
 // Функция для показа данных комментария
-const createComment = ({ avatar, name, message}) => {
+const createComment = ({ avatar, name, message }) => {
   const comment = commentElement.cloneNode(true);
 
   comment.querySelector('.social__picture').src = avatar;
@@ -68,6 +72,7 @@ const showModalPhoto = (data) => {
   commentCountElement.classList.add('hidden');
   document.addEventListener('keydown', onDocumentKeydown);
 
+  // const photoData = createPhotoPage();
   renderPhotoData(data);
   renderComments(data.comments);
 };

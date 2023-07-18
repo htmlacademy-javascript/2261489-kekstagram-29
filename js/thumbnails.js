@@ -6,7 +6,7 @@ const photoTemplate = document.querySelector('#picture')
 const container = document.querySelector('.pictures');
 
 // Отдельный элемент- фото
-const createPhoto = ({ url, description, likes, comments, photoId}) => {
+const createPhoto = ({ url, description, likes, comments, photoId }) => {
   const photo = photoTemplate.cloneNode(true);
 
   photo.querySelector('.picture__img').src = url;
