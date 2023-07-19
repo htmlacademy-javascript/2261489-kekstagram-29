@@ -59,8 +59,8 @@ const getLikes = function () {
   return getRandomNumber(15, 200);
 };
 
-// Описание фотографии
-const createPhotoPage = function () {
+// Данные фотографии
+const getPhotoData = function () {
   return {
     photoId: getPhotoId(),
     url: getUrl(),
@@ -70,8 +70,9 @@ const createPhotoPage = function () {
   };
 };
 
+
 // // Массив из 25 объектов-фото
 const getPhotos = () => Array.from({length: 25})
-  .map(() => createPhotoPage());
+  .map(() => getPhotoData());
 
-export { getPhotos };
+export { getPhotoData, getPhotos };
