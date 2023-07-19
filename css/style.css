@@ -1409,6 +1409,12 @@ main {
   display: none;
 }
 
-.img-upload__field-wrapper--error {
-
+.pristine-error {
+  background-color: #610202;
+  color: #ffffff;
+  margin: 0 auto;
+  width: 450px;
+  font-size: 14px;
+  z-index: 10;
+  position: relative;
 }

@@ -11,14 +11,17 @@ const descriptionField = form.querySelector('.text__description');
 const maxHashtagsQuantity = 5;
 const validSymbols = /^#[a-zа-яё0-9]{1,19}$/i;
 
+// Сообщения валидатора об ошибках
+const invalidSymbolsError = 'В хэштеге использованы недопустимые символы';
+const invalidQuantityError = 'Максимум 5 хэштегов';
+const ununiqueTagsError = 'Такой хэштег уже есть';
 
 // Добавление библиотеки-валидатора Pristine
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
-  errorClassText: 'img-upload__field-wrapper--error',
+  // errorClassText: 'img-upload__field-wrapper--error',
 });
-
 
 // Действия при закрытии модального окна формы
 const hideModalForm = () => {
@@ -61,6 +64,31 @@ const isUniqueTag = (value) => {
   const lowerCaseTags = normalizeTags(value).map((tag) => tag.toLowerCase());
   return lowerCaseTags.length === new Set(lowerCaseTags).size;
 };
+
+// Валидаторы хэштегов
+pristine.addValidator(
+  hashtagField,
+  isValidSymbols,
+  invalidSymbolsError,
+  2,
+  true
+);
+
+pristine.addValidator(
+  hashtagField,
+  isValidQuantity,
+  invalidQuantityError,
+  3,
+  true
+);
+
+pristine.addValidator(
+  hashtagField,
+  isUniqueTag,
+  ununiqueTagsError,
+  1,
+  true
+);
 
 // При клике на кнопку загрузки файла
 const onUploadFieldClick = () => {
