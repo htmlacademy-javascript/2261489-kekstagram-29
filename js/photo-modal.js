@@ -15,7 +15,7 @@ const commentsForShow = 5;
 let commentsShown = 0;
 let comments = [];
 
-// Функция для закрытия полноэкранного фото
+// Действия при закрытии полноэкранного фото
 const hideModalPhoto = () => {
   photoModalElement.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
