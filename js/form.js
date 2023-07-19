@@ -7,6 +7,11 @@ const uploadField = form.querySelector('.img-upload__input');
 const hashtagField = form.querySelector('.text__hashtags');
 const descriptionField = form.querySelector('.text__description');
 
+// Правила для валидации хэштегов
+const maxHashtagsQuantity = 5;
+const validSymbols = /^#[a-zа-яё0-9]{1,19}$/i;
+
+
 // Добавление библиотеки-валидатора Pristine
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
@@ -24,9 +29,12 @@ const hideModalForm = () => {
   document.removeEventListener('keydown', onDocumentKeydown);
 };
 
+// Отмена закрытия модалки при фокусе на текстовых полях
+const cancelCloseModal = () => document.activeElement === hashtagField || document.activeElement === descriptionField;
+
 // Функция-обработчик нажатия Escape
 function onDocumentKeydown(evt) {
-  if (evt.key === 'Escape') {
+  if (evt.key === 'Escape' && !cancelCloseModal()) {
     evt.preventDefault();
     hideModalForm();
   }
@@ -37,6 +45,21 @@ const showModalForm = () => {
   overlay.classList.remove('hidden');
   body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
+};
+
+// Функция для нормализации хэштега- обрезаем лишние пробелы и пустые строки в массиве хэштегов
+const normalizeTags = (tagString) => tagString.trim().split(' ').filter((tag) => Boolean(tag.length));
+
+// Проверка на валидность символов
+const isValidSymbols = (value) => normalizeTags(value).every((tag) => validSymbols.test(tag));
+
+// Проверка на количество хэштегов
+const isValidQuantity = (value) => normalizeTags(value).length <= maxHashtagsQuantity;
+
+// Проверка на уникальность хэштегов
+const isUniqueTag = (value) => {
+  const lowerCaseTags = normalizeTags(value).map((tag) => tag.toLowerCase());
+  return lowerCaseTags.length === new Set(lowerCaseTags).size;
 };
 
 // При клике на кнопку загрузки файла
@@ -50,6 +73,6 @@ const onCancelButtonClick = () => {
 };
 
 // Обработчик клика на кнопку загрузки файла
-uploadField.addEventListener('click', onUploadFieldClick)
+uploadField.addEventListener('click', onUploadFieldClick);
 // Обработчик клика на кнопку закрытия формы
 cancelButton.addEventListener('click', onCancelButtonClick);
