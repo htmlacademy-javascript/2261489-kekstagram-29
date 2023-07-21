@@ -1,3 +1,5 @@
+import { resetScale } from './scale.js';
+
 // Элементы, нобходимые для работы с формой
 const body = document.querySelector('body');
 const form = document.querySelector('.img-upload__form');
@@ -26,6 +28,7 @@ const pristine = new Pristine(form, {
 // Действия при закрытии модального окна формы
 const hideModalForm = () => {
   form.reset();
+  resetScale();
   pristine.reset();
   overlay.classList.add('hidden');
   body.classList.remove('modal-open');
