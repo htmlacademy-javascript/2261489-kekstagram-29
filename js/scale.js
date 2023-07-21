@@ -23,8 +23,9 @@ const onPlusButtonClick = () => {
   const newValue = currentValue + scaleStep;
   if (newValue > maxScale) {
     scaleImage(maxScale);
+  } else {
+    scaleImage(newValue);
   }
-  scaleImage(newValue);
 };
 
 const onMinusButtonClick = () => {
@@ -32,8 +33,9 @@ const onMinusButtonClick = () => {
   const newValue = currentValue - scaleStep;
   if (newValue < minScale) {
     scaleImage(minScale);
+  } else {
+    scaleImage(newValue);
   }
-  scaleImage(newValue);
 };
 
 // Сброс масштаба
