@@ -1,4 +1,5 @@
 import { resetScale } from './scale.js';
+import { resetEffects } from './effects.js';
 
 // Элементы, нобходимые для работы с формой
 const body = document.querySelector('body');
@@ -29,6 +30,7 @@ const pristine = new Pristine(form, {
 const hideModalForm = () => {
   form.reset();
   resetScale();
+  resetEffects();
   pristine.reset();
   overlay.classList.add('hidden');
   body.classList.remove('modal-open');
