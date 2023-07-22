@@ -69,17 +69,6 @@ const showSlider = () => sliderContainer.classList.remove('hidden');
 // Скрытие слайдера
 const hideSlider = () => sliderContainer.classList.add('hidden');
 
-// Создание слайдера
-noUiSlider.create(sliderElement, {
-  range: {
-    min: defaultEffect.min,
-    max: defaultEffect.max,
-  },
-  start: defaultEffect.max,
-  step: defaultEffect.step,
-  connect: 'lower',
-});
-
 // Обновление слайдера
 const updateSlider = () => {
   sliderElement.noUiSlider.updateOptions({
@@ -109,23 +98,45 @@ const onEffectsChange = (evt) => {
   updateSlider();
 };
 
+// Обновление эффекта при движении слайдера
+const onSliderUpdate = () => {
+  const sliderValue = sliderElement.noUiSlider.get();
+  effectValue.value = sliderValue;
+
+  if (isDefault()) {
+    imageElement.style.filter = defaultEffect.filter;
+  } else {
+    imageElement.style.filter = `${chosenEffect.filter}(${sliderValue}${chosenEffect.unit})`;
+  }
+};
+
 // Сброс эффектов
 const resetEffects = () => {
   chosenEffect = defaultEffect;
   updateSlider();
 };
 
-// Обновление эффекта при движении слайдера
-const onSliderUpdate = () => {
-  const sliderValue = sliderElement.noUiSlider.get();
-
-  if (isDefault()) {
-    imageElement.style.filter = defaultEffect.filter;
-  } else {
-    imageElement.style.filter = `${chosenEffect.filter}(${sliderValue}${chosenEffect.unit})`;
-    effectValue.value = sliderValue;
-  }
-};
+// Создание слайдера
+noUiSlider.create(sliderElement, {
+  range: {
+    min: defaultEffect.min,
+    max: defaultEffect.max,
+  },
+  start: defaultEffect.max,
+  step: defaultEffect.step,
+  connect: 'lower',
+  format: {
+    to: function (value) {
+      if (Number.isInteger(value)) {
+        return value.toFixed(0);
+      }
+      return value.toFixed(1);
+    },
+    from: function (value) {
+      return parseFloat(value);
+    },
+  },
+});
 
 // Обработчики изменений слайдера и эффекта
 const setEffectsSlider = () => {
