@@ -82,6 +82,7 @@ const initSlider = () => {
   });
 };
 
+
 // Обновление слайдера
 const updateSlider = () => {
   sliderElement.noUiSlider.updateOptions({
@@ -89,8 +90,8 @@ const updateSlider = () => {
       min: chosenEffect.min,
       max: chosenEffect.max,
     },
-    step: chosenEffect.step,
     start: chosenEffect.max,
+    step: chosenEffect.step,
   });
 
   if (isDefault()){
@@ -98,6 +99,17 @@ const updateSlider = () => {
   } else {
     showSlider();
   }
+};
+
+// Смена эффекта
+const onEffectsChange = (evt) => {
+  if(!evt.target.classList.contains('effects__radio')) {
+    return;
+  }
+
+  chosenEffect = effects.find((effect) => effect.name === evt.target.value);
+  imageElement.className = `effects__preview--${chosenEffect.name}`;
+  updateSlider();
 };
 
 // Сброс эффектов
@@ -116,17 +128,6 @@ const onSliderUpdate = () => {
     imageElement.style.filter = `${chosenEffect.style}(${sliderValue}${chosenEffect.unit})`;
     effectValue.value = sliderValue;
   }
-};
-
-// Смена эффекта
-const onEffectsChange = (evt) => {
-  if(!evt.target.classList.contains('effects__radio')) {
-    return;
-  }
-
-  chosenEffect = effects.find((effect) => effect.name === evt.target.value);
-  imageElement.className = `effects__preview--${chosenEffect}`;
-  updateSlider();
 };
 
 // Обработчики изменений слайдера и эффекта
