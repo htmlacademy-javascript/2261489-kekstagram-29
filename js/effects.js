@@ -2,7 +2,7 @@
 const effects = {
   none: {
     name: 'none',
-    style: 'none',
+    filter: 'none',
     min: 0,
     max: 100,
     step: 1,
@@ -10,7 +10,7 @@ const effects = {
   },
   chrome: {
     name: 'chrome',
-    style: 'grayscale',
+    filter: 'grayscale',
     min: 0,
     max: 1,
     step: 0.1,
@@ -18,7 +18,7 @@ const effects = {
   },
   sepia: {
     name: 'sepia',
-    style: 'sepia',
+    filter: 'sepia',
     min: 0,
     max: 1,
     step: 0.1,
@@ -26,7 +26,7 @@ const effects = {
   },
   marvin: {
     name: 'marvin',
-    style: 'invert',
+    filter: 'invert',
     min: 0,
     max: 100,
     step: 1,
@@ -34,7 +34,7 @@ const effects = {
   },
   phobos: {
     name: 'phobos',
-    style: 'blur',
+    filter: 'blur',
     min: 0,
     max: 3,
     step: 0.1,
@@ -42,7 +42,7 @@ const effects = {
   },
   heat: {
     name: 'heat',
-    style: 'brightness',
+    filter: 'brightness',
     min: 1,
     max: 3,
     step: 0.1,
@@ -70,18 +70,15 @@ const showSlider = () => sliderContainer.classList.remove('hidden');
 const hideSlider = () => sliderContainer.classList.add('hidden');
 
 // Создание слайдера
-const initSlider = () => {
-  noUiSlider.create(sliderElement, {
-    range: {
-      min: defaultEffect.min,
-      max: defaultEffect.max,
-    },
-    start: defaultEffect.max,
-    step: defaultEffect.step,
-    connect: 'lower',
-  });
-};
-
+noUiSlider.create(sliderElement, {
+  range: {
+    min: defaultEffect.min,
+    max: defaultEffect.max,
+  },
+  start: defaultEffect.max,
+  step: defaultEffect.step,
+  connect: 'lower',
+});
 
 // Обновление слайдера
 const updateSlider = () => {
@@ -123,17 +120,15 @@ const onSliderUpdate = () => {
   const sliderValue = sliderElement.noUiSlider.get();
 
   if (isDefault()) {
-    imageElement.style.filter = defaultEffect.style;
+    imageElement.style.filter = defaultEffect.filter;
   } else {
-    imageElement.style.filter = `${chosenEffect.style}(${sliderValue}${chosenEffect.unit})`;
+    imageElement.style.filter = `${chosenEffect.filter}(${sliderValue}${chosenEffect.unit})`;
     effectValue.value = sliderValue;
   }
 };
 
 // Обработчики изменений слайдера и эффекта
 const setEffectsSlider = () => {
-  initSlider();
-  hideSlider();
   effectsElement.addEventListener('change', onEffectsChange);
   sliderElement.noUiSlider.on('update', onSliderUpdate);
 };
