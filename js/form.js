@@ -1,5 +1,6 @@
 import { resetScale } from './scale.js';
 import { resetEffects } from './effects.js';
+import { setEffectsSlider } from './effects.js';
 
 // Элементы, нобходимые для работы с формой
 const body = document.querySelector('body');
@@ -53,6 +54,7 @@ const showModalForm = () => {
   overlay.classList.remove('hidden');
   body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
+  setEffectsSlider();
 };
 
 // Функция для нормализации хэштега- обрезаем лишние пробелы и пустые строки в массиве хэштегов
