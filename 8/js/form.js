@@ -7,6 +7,7 @@ const body = document.querySelector('body');
 const form = document.querySelector('.img-upload__form');
 const overlay = form.querySelector('.img-upload__overlay');
 const cancelButton = form.querySelector('.img-upload__cancel');
+const submitButton = form.querySelector('.img-upload__submit');
 const uploadField = form.querySelector('.img-upload__input');
 const hashtagField = form.querySelector('.text__hashtags');
 const descriptionField = form.querySelector('.text__description');
@@ -36,6 +37,8 @@ const hideModalForm = () => {
   overlay.classList.add('hidden');
   body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
+  hashtagField.removeEventListener('keyup', onTextKeyUp);
+  descriptionField.removeEventListener('keyup', onTextKeyUp);
 };
 
 // Отмена закрытия модалки при фокусе на текстовых полях
@@ -49,13 +52,6 @@ function onDocumentKeydown(evt) {
   }
 }
 
-// Действия при открытии модального окна формы
-const showModalForm = () => {
-  overlay.classList.remove('hidden');
-  body.classList.add('modal-open');
-  document.addEventListener('keydown', onDocumentKeydown);
-  setEffectsSlider();
-};
 
 // Функция для нормализации хэштега- обрезаем лишние пробелы и пустые строки в массиве хэштегов
 const normalizeTags = (tagString) => tagString.trim().split(' ').filter((tag) => Boolean(tag.length));
@@ -96,6 +92,27 @@ pristine.addValidator(
   1,
   true
 );
+
+// Функция блокировки кнопки публикации при невалидных хэштегах
+function onTextKeyUp() {
+  if (isValidSymbols(hashtagField.value) && isValidQuantity(hashtagField.value) &&
+  isUniqueTag(hashtagField.value) && descriptionField.value.length < 141 && descriptionField.value.length >= 1) {
+    submitButton.disabled = false;
+  } else {
+    submitButton.disabled = true;
+  }
+}
+
+// Действия при открытии модального окна формы
+const showModalForm = () => {
+  overlay.classList.remove('hidden');
+  body.classList.add('modal-open');
+  document.addEventListener('keydown', onDocumentKeydown);
+  setEffectsSlider();
+  hashtagField.addEventListener('keyup', onTextKeyUp);
+  descriptionField.addEventListener('keyup', onTextKeyUp);
+};
+
 
 // При клике на кнопку загрузки файла
 const onUploadFieldClick = () => {
