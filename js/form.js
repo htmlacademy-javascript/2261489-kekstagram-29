@@ -16,6 +16,12 @@ const descriptionField = form.querySelector('.text__description');
 const maxHashtagsQuantity = 5;
 const validSymbols = /^#[a-zа-яё0-9]{1,19}$/i;
 
+// Текст для кнопки публикации
+const SubmitButtonText = {
+  IDLE: 'Сохранить',
+  SENDING: 'Сохраняю...'
+};
+
 // Сообщения валидатора об ошибках
 const invalidSymbolsError = 'В хэштеге использованы недопустимые символы';
 const invalidQuantityError = 'Максимум 5 хэштегов';
@@ -121,7 +127,33 @@ const onCancelButtonClick = () => {
   hideModalForm();
 };
 
+// Заблокировать / разблокировать кнопку публикациии
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = SubmitButtonText.SENDING;
+};
+
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = SubmitButtonText.IDLE;
+};
+
 // Обработчик клика на кнопку загрузки файла
 uploadField.addEventListener('click', onUploadFieldClick);
 // Обработчик клика на кнопку закрытия формы
 cancelButton.addEventListener('click', onCancelButtonClick);
+
+const setOnFormSubmit = (callback) => {
+  form.addEventListener('submit', async(evt) => {
+    evt.preventDefault();
+    const isValid = pristine.validate();
+
+    if (isValid) {
+      blockSubmitButton();
+      await callback(new FormData(form));
+      unblockSubmitButton();
+    }
+  });
+};
+
+export {setOnFormSubmit};

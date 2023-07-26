@@ -3,4 +3,3 @@ import { openModal } from './open-photo.js';
 import './form.js';
 
 openModal(getPhotos());
-
