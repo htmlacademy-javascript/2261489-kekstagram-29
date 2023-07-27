@@ -99,4 +99,4 @@ const showModalPhoto = (data) => {
 cancelButtonElement.addEventListener('click', onCancelButtonClick);
 commentsLoaderElement.addEventListener('click', onCommentsLoaderClick);
 
-export { showModalPhoto };
+export { showModalPhoto, hideModalPhoto };

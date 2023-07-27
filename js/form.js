@@ -156,4 +156,4 @@ const setOnFormSubmit = (callback) => {
   });
 };
 
-export {setOnFormSubmit};
+export {setOnFormSubmit, hideModalForm};

@@ -7,13 +7,13 @@ const container = document.querySelector('.pictures');
 // Открытие модального окна
 const openModal = (pictures) => {
   container.addEventListener('click', (evt) => {
-    const photo = evt.target.closest('[data-photo-id]');
+    const photo = evt.target.closest('[data-id]');
     if (!photo) {
       return;
     }
 
     evt.preventDefault();
-    const picture = pictures.find((item) => item.photoId === +photo.dataset.photoId);
+    const picture = pictures.find((item) => item.id === +photo.dataset.id);
     showModalPhoto(picture);
   });
   renderPhotos(pictures, container);

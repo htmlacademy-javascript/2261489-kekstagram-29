@@ -1,5 +1,37 @@
-import { getPhotos } from './data.js';
+// import { getPhotos } from './data.js';
+import { getData, sendData } from './api.js';
+import { showAlert } from './util.js';
+import { renderPhotos } from './thumbnails.js';
 import { openModal } from './open-photo.js';
-import './form.js';
+import { setOnFormSubmit, hideModalForm } from './form.js';
+import { showSuccessMessage, showErrorMessage } from './form-message.js';
 
-openModal(getPhotos());
+try {
+  const data = await getData();
+  renderPhotos(data);
+  openModal(data);
+  setOnFormSubmit();
+  hideModalForm();
+} catch (err) {
+  showAlert(err.message);
+}
+
+// setOnFormSubmit(async (data) => {
+//   try {
+//     await sendData(data);
+//     hideModalForm();
+//     showSuccessMessage();
+//   } catch {
+//     showErrorMessage();
+//   }
+// });
+
+
+// getData()
+//   .then((data) => {
+//     renderPhotos(data);
+//     openModal(data);
+//   })
+//   .catch((err) => {
+//     showAlert(err.message);
+//   });
