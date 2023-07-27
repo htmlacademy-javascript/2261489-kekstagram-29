@@ -1,24 +1,24 @@
-// Генератор случайных чисел
-const getRandomNumber = function (min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-};
-getRandomNumber();
+// // Генератор случайных чисел
+// const getRandomNumber = function (min, max) {
+//   return Math.floor(Math.random() * (max - min + 1)) + min;
+// };
+// getRandomNumber();
 
-// Генератор неповторяющихся чисел
-const getUniqueNumber = function (min, max) {
-  const usedNumbers = [];
+// // Генератор неповторяющихся чисел
+// const getUniqueNumber = function (min, max) {
+//   const usedNumbers = [];
 
-  return function () {
-    let currentNumber = getRandomNumber (min, max);
+//   return function () {
+//     let currentNumber = getRandomNumber (min, max);
 
-    while (usedNumbers.includes(currentNumber)) {
-      currentNumber = getRandomNumber(min, max);
-    }
-    usedNumbers.push(currentNumber);
-    return currentNumber;
-  };
-};
-getUniqueNumber();
+//     while (usedNumbers.includes(currentNumber)) {
+//       currentNumber = getRandomNumber(min, max);
+//     }
+//     usedNumbers.push(currentNumber);
+//     return currentNumber;
+//   };
+// };
+// getUniqueNumber();
 
 // Время показа сообщения об ошибке отправки формы
 const ALERT_SHOW_TIME = 5000;
@@ -45,4 +45,4 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
-export {getRandomNumber, getUniqueNumber, showAlert};
+export {showAlert};

@@ -18,8 +18,8 @@ const validSymbols = /^#[a-zа-яё0-9]{1,19}$/i;
 
 // Текст для кнопки публикации
 const SubmitButtonText = {
-  IDLE: 'Сохранить',
-  SENDING: 'Сохраняю...'
+  IDLE: 'Опубликовать',
+  SENDING: 'Публикую...'
 };
 
 // Сообщения валидатора об ошибках
@@ -127,6 +127,7 @@ const onCancelButtonClick = () => {
   hideModalForm();
 };
 
+
 // Заблокировать / разблокировать кнопку публикациии
 const blockSubmitButton = () => {
   submitButton.disabled = true;
@@ -143,17 +144,14 @@ uploadField.addEventListener('click', onUploadFieldClick);
 // Обработчик клика на кнопку закрытия формы
 cancelButton.addEventListener('click', onCancelButtonClick);
 
+// При нажатии на кнопку публикации
 const setOnFormSubmit = (callback) => {
-  form.addEventListener('submit', async(evt) => {
+  form.addEventListener('submit', async (evt) => {
     evt.preventDefault();
-    const isValid = pristine.validate();
 
-    if (isValid) {
-      blockSubmitButton();
-      await callback(new FormData(form));
-      unblockSubmitButton();
-    }
+    blockSubmitButton();
+    await callback(new FormData(form));
   });
 };
 
-export {setOnFormSubmit, hideModalForm};
+export {setOnFormSubmit, hideModalForm, unblockSubmitButton};

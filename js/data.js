@@ -1,5 +1,5 @@
-import {getRandomNumber} from './util.js';
-import {getUniqueNumber} from './util.js';
+// import {getRandomNumber} from './util.js';
+// import {getUniqueNumber} from './util.js';
 
 // // Имена
 // const names = [
