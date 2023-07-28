@@ -1,6 +1,8 @@
 import { resetScale } from './scale.js';
 import { resetEffects } from './effects.js';
 import { setEffectsSlider } from './effects.js';
+import { sendData } from './api.js';
+import { showSuccessMessage, showErrorMessage } from './form-message.js';
 
 // Элементы, нобходимые для работы с формой
 const body = document.querySelector('body');
@@ -144,14 +146,27 @@ uploadField.addEventListener('click', onUploadFieldClick);
 // Обработчик клика на кнопку закрытия формы
 cancelButton.addEventListener('click', onCancelButtonClick);
 
-// При нажатии на кнопку публикации
-const setOnFormSubmit = (callback) => {
-  form.addEventListener('submit', async (evt) => {
-    evt.preventDefault();
-
-    blockSubmitButton();
-    await callback(new FormData(form));
-  });
+// Отправка данных
+const sendingData = async (data) => {
+  try {
+    await sendData(data);
+    hideModalForm();
+    showSuccessMessage();
+  } catch {
+    showErrorMessage();
+  }
 };
 
-export {setOnFormSubmit, hideModalForm, unblockSubmitButton};
+// При нажатии на кнопку публикации
+form.addEventListener('submit', async (evt) => {
+  evt.preventDefault();
+  const isValid = pristine.validate();
+  if (isValid) {
+    blockSubmitButton();
+    const formData = new FormData(form);
+    await sendingData(formData);
+    unblockSubmitButton();
+  }
+});
+
+export {hideModalForm, unblockSubmitButton};
