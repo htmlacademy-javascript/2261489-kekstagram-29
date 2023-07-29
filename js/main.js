@@ -4,12 +4,14 @@ import { renderPhotos } from './thumbnails.js';
 import { openModal } from './open-photo.js';
 import { hideModalForm } from './form.js';
 import { showFilters, setDebouncedFilter } from './thumbnails-filter.js';
+import { setPreviewPictureListener } from './upload-photo.js';
 
 try {
   const data = await getData();
-  openModal(data);
-  hideModalForm();
   showFilters();
+  openModal(data);
+  setPreviewPictureListener();
+  hideModalForm();
   renderPhotos(data);
   setDebouncedFilter(data);
 } catch (err) {
