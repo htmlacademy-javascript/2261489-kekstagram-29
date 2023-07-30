@@ -1,5 +1,5 @@
 // Массив с параметрами эффектов для изображения
-const effects = [
+const Effects = [
   {
     name: 'none',
     filter: 'none',
@@ -50,8 +50,8 @@ const effects = [
   }
 ];
 
-const defaultEffect = effects[0];
-let chosenEffect = defaultEffect;
+const DEFAULT_EFFECT = Effects[0];
+let chosenEffect = DEFAULT_EFFECT;
 
 // Элементы, необходимые для работы с эффектами
 const imageElement = document.querySelector('.img-upload__preview img');
@@ -61,7 +61,7 @@ const sliderElement = document.querySelector('.effect-level__slider');
 const effectValue = document.querySelector('.effect-level__value');
 
 // Проверка на отсутствие фильтра
-const isDefault = () => chosenEffect === defaultEffect;
+const isDefault = () => chosenEffect === DEFAULT_EFFECT;
 
 // Показ слайдера
 const showSlider = () => sliderContainer.classList.remove('hidden');
@@ -93,7 +93,7 @@ const onEffectsChange = (evt) => {
     return;
   }
 
-  chosenEffect = effects.find((effect) => effect.name === evt.target.value);
+  chosenEffect = Effects.find((effect) => effect.name === evt.target.value);
   imageElement.className = `effects__preview--${chosenEffect.name}`;
   updateSlider();
 };
@@ -112,18 +112,18 @@ const onSliderUpdate = () => {
 
 // Сброс эффектов
 const resetEffects = () => {
-  chosenEffect = defaultEffect;
+  chosenEffect = DEFAULT_EFFECT;
   updateSlider();
 };
 
 // Создание слайдера
 noUiSlider.create(sliderElement, {
   range: {
-    min: defaultEffect.min,
-    max: defaultEffect.max,
+    min: DEFAULT_EFFECT.min,
+    max: DEFAULT_EFFECT.max,
   },
-  start: defaultEffect.max,
-  step: defaultEffect.step,
+  start: DEFAULT_EFFECT.max,
+  step: DEFAULT_EFFECT.step,
   connect: 'lower',
   format: {
     to: function (value) {

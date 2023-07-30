@@ -15,8 +15,8 @@ const hashtagField = form.querySelector('.text__hashtags');
 const descriptionField = form.querySelector('.text__description');
 
 // Правила для валидации хэштегов
-const maxHashtagsQuantity = 5;
-const validSymbols = /^#[a-zа-яё0-9]{1,19}$/i;
+const MAX_HASHTAGS_QUANTITY = 5;
+const VALID_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
 
 // Текст для кнопки публикации
 const SubmitButtonText = {
@@ -25,9 +25,9 @@ const SubmitButtonText = {
 };
 
 // Сообщения валидатора об ошибках
-const invalidSymbolsError = 'В хэштеге использованы недопустимые символы';
-const invalidQuantityError = 'Максимум 5 хэштегов';
-const ununiqueTagsError = 'Такой хэштег уже есть';
+const INVALID_SYMBOLS_ERROR = 'В хэштеге использованы недопустимые символы';
+const INVALID_QUANTITY_ERROR = 'Максимум 5 хэштегов';
+const UNUNIQUE_TAGS_ERROR = 'Такой хэштег уже есть';
 
 // Добавление библиотеки-валидатора Pristine
 const pristine = new Pristine(form, {
@@ -64,10 +64,10 @@ function onDocumentKeydown(evt) {
 const normalizeTags = (tagString) => tagString.trim().split(' ').filter((tag) => Boolean(tag.length));
 
 // Проверка на валидность символов
-const isValidSymbols = (value) => normalizeTags(value).every((tag) => validSymbols.test(tag));
+const isValidSymbols = (value) => normalizeTags(value).every((tag) => VALID_SYMBOLS.test(tag));
 
 // Проверка на количество хэштегов
-const isValidQuantity = (value) => normalizeTags(value).length <= maxHashtagsQuantity;
+const isValidQuantity = (value) => normalizeTags(value).length <= MAX_HASHTAGS_QUANTITY;
 
 // Проверка на уникальность хэштегов
 const isUniqueTag = (value) => {
@@ -79,7 +79,7 @@ const isUniqueTag = (value) => {
 pristine.addValidator(
   hashtagField,
   isValidSymbols,
-  invalidSymbolsError,
+  INVALID_SYMBOLS_ERROR,
   2,
   true
 );
@@ -87,7 +87,7 @@ pristine.addValidator(
 pristine.addValidator(
   hashtagField,
   isValidQuantity,
-  invalidQuantityError,
+  INVALID_QUANTITY_ERROR,
   3,
   true
 );
@@ -95,7 +95,7 @@ pristine.addValidator(
 pristine.addValidator(
   hashtagField,
   isUniqueTag,
-  ununiqueTagsError,
+  UNUNIQUE_TAGS_ERROR,
   1,
   true
 );
