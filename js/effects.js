@@ -104,7 +104,7 @@ const onSliderUpdate = () => {
   effectValue.value = sliderValue;
 
   if (isDefault()) {
-    imageElement.style.filter = defaultEffect.filter;
+    imageElement.style.filter = DEFAULT_EFFECT.filter;
   } else {
     imageElement.style.filter = `${chosenEffect.filter}(${sliderValue}${chosenEffect.unit})`;
   }
