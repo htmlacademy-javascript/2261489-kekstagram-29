@@ -102,7 +102,7 @@ pristine.addValidator(
 
 function onTextKeyUp() {
   if (isValidSymbols(hashtagField.value) && isValidQuantity(hashtagField.value) &&
-  isUniqueTag(hashtagField.value) && descriptionField.value.length < 141 && descriptionField.value.length >= 1) {
+  isUniqueTag(hashtagField.value) && descriptionField.value.length < 141) {
     submitButton.disabled = false;
   } else {
     submitButton.disabled = true;
@@ -120,7 +120,7 @@ const showModalForm = () => {
 };
 
 // При клике на кнопку загрузки файла
-const onUploadFieldClick = () => {
+const onUploadFieldChange = () => {
   showModalForm();
 };
 
@@ -142,7 +142,7 @@ const unblockSubmitButton = () => {
 };
 
 // Обработчик клика на кнопку загрузки файла
-uploadField.addEventListener('click', onUploadFieldClick);
+uploadField.addEventListener('change', onUploadFieldChange);
 // Обработчик клика на кнопку закрытия формы
 cancelButton.addEventListener('click', onCancelButtonClick);
 

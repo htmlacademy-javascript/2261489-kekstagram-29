@@ -6,14 +6,15 @@ import { hideModalForm } from './form.js';
 import { showFilters, setDebouncedFilter } from './thumbnails-filter.js';
 import { setPreviewPictureListener } from './upload-photo.js';
 
+setPreviewPictureListener();
+hideModalForm();
+
 try {
   const data = await getData();
-  showFilters();
-  openModal(data);
-  setPreviewPictureListener();
-  hideModalForm();
   renderPhotos(data);
+  showFilters();
   setDebouncedFilter(data);
+  openModal(data);
 } catch (err) {
   showAlert(err.message);
 }
