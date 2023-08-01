@@ -15,7 +15,6 @@ function isEscPress(evt, cb) {
   }
 }
 
-// Закрытие ошибки при поомощи Escape, без закрытия формы
 
 // При клике по кнопке закрытия сообщения
 const onSuccessCloseButtonClick = () => {
@@ -71,6 +70,7 @@ const showErrorMessage = () => {
 
   errorModal.querySelector('.error__button').addEventListener('click', onErrorCloseButtonClick);
   document.addEventListener('click', onErrorDocumentClick);
+  document.addEventListener('keydown', onErrorDocumentKeydown);
   document.removeEventListener('keydown', onFormKeydown);
 };
 

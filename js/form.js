@@ -169,4 +169,4 @@ form.addEventListener('submit', async (evt) => {
   }
 });
 
-export {hideModalForm, unblockSubmitButton, onFormKeydown, cancelCloseModal};
+export {hideModalForm, unblockSubmitButton, onFormKeydown};
