@@ -7,6 +7,7 @@ const container = document.querySelector('.pictures');
 
 // Отрисовка на странице миниатюр
 const renderPhotos = (pictures) => {
+  document.querySelectorAll('.picture').forEach((thumbnail) => thumbnail.remove());
   const fragment = document.createDocumentFragment();
 
   pictures.forEach(({url, likes, description, comments, id}) => {

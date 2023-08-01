@@ -44,7 +44,7 @@ const hideModalForm = () => {
   pristine.reset();
   overlay.classList.add('hidden');
   body.classList.remove('modal-open');
-  document.removeEventListener('keydown', onDocumentKeydown);
+  document.removeEventListener('keydown', onFormKeydown);
   hashtagField.removeEventListener('keyup', onTextKeyUp);
   descriptionField.removeEventListener('keyup', onTextKeyUp);
 };
@@ -53,7 +53,7 @@ const hideModalForm = () => {
 const cancelCloseModal = () => document.activeElement === hashtagField || document.activeElement === descriptionField;
 
 // Функция-обработчик нажатия Escape
-function onDocumentKeydown(evt) {
+function onFormKeydown(evt) {
   if (evt.key === 'Escape' && !cancelCloseModal()) {
     evt.preventDefault();
     hideModalForm();
@@ -113,7 +113,7 @@ function onTextKeyUp() {
 const showModalForm = () => {
   overlay.classList.remove('hidden');
   body.classList.add('modal-open');
-  document.addEventListener('keydown', onDocumentKeydown);
+  document.addEventListener('keydown', onFormKeydown);
   setEffectsSlider();
   hashtagField.addEventListener('keyup', onTextKeyUp);
   descriptionField.addEventListener('keyup', onTextKeyUp);
@@ -169,4 +169,4 @@ form.addEventListener('submit', async (evt) => {
   }
 });
 
-export {hideModalForm, unblockSubmitButton};
+export {hideModalForm, unblockSubmitButton, onFormKeydown, cancelCloseModal};

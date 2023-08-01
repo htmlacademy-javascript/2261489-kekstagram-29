@@ -1,6 +1,11 @@
+import {onFormKeydown} from './form.js';
 // Шаблоны сообщений об успешной загрузке/ошибке
 const successTemplate = document.querySelector('#success').content.querySelector('.success');
 const errorTemplate = document.querySelector('#error').content.querySelector('.error');
+
+// Сообщение об успешной отправке/ошибке
+const successModal = successTemplate.cloneNode(true);
+const errorModal = errorTemplate.cloneNode(true);
 
 // Функция-обработчик нажатия ESC
 function isEscPress(evt, cb) {
@@ -9,6 +14,8 @@ function isEscPress(evt, cb) {
     cb();
   }
 }
+
+// Закрытие ошибки при поомощи Escape, без закрытия формы
 
 // При клике по кнопке закрытия сообщения
 const onSuccessCloseButtonClick = () => {
@@ -40,9 +47,9 @@ const onErrorDocumentClick = (evt) => {
 const onErrorDocumentKeydown = (evt) => isEscPress(evt, closeErrorMessage);
 const onSuccessDocumentKeydown = (evt) => isEscPress(evt, closeSuccessMessage);
 
+
 // Показ сообщения об успешной загрузке
 const showSuccessMessage = () => {
-  const successModal = successTemplate.cloneNode(true);
   document.body.append(successModal);
 
   successModal.querySelector('.success__button').addEventListener('click', onSuccessCloseButtonClick);
@@ -60,12 +67,11 @@ function closeSuccessMessage() {
 
 // Показ сообщения об ошибке
 const showErrorMessage = () => {
-  const errorModal = errorTemplate.cloneNode(true);
   document.body.append(errorModal);
 
   errorModal.querySelector('.error__button').addEventListener('click', onErrorCloseButtonClick);
   document.addEventListener('click', onErrorDocumentClick);
-  document.addEventListener('keydown', onErrorDocumentKeydown);
+  document.removeEventListener('keydown', onFormKeydown);
 };
 
 // Закрытие сообщения об ошибке
@@ -74,6 +80,7 @@ function closeErrorMessage() {
 
   document.removeEventListener('click', onErrorDocumentClick);
   document.removeEventListener('keydown', onErrorDocumentKeydown);
+  document.addEventListener('keydown', onFormKeydown);
 }
 
 export{showErrorMessage,showSuccessMessage};
